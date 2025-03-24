@@ -1,0 +1,125 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+
+<div class="container pt-5">
+  <h1 class="text-center" style="color: #8CE17D;">Crop Disease Prediction</h1>
+  <p class="text-center pt-3">Our models provide an easy, fast, and efficient way to detect diseases in your crops.</p>
+</div>
+
+<!-- Display the form for image upload and crop selection -->
+{% if not result %}
+<form 
+  action="{{ url_for('find_crop_disease') }}" 
+  method="POST" 
+  enctype="multipart/form-data" 
+  style="margin-top: 30px; width: 80%; text-align: center; margin: auto"
+> 
+  <div class="container">
+    <!-- Crop Selection Dropdown -->
+    <div class="row d-flex justify-content-center">
+      <label for="crop-select">Choose a crop:</label>
+      <div class="col-md-4">
+        <select id="crop-select" name="crop" class="form-control" required>
+          {% for crop in crops %}
+          <option value="{{ crop }}" data-show=".{{ crop }}">{{ crop }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <br />
+
+    <!-- Image Upload -->
+    <div class="row d-flex justify-content-center">
+      <label for="file-upload">Upload your crop image:</label>
+      <div class="col-md-4 pt-2">
+        <input 
+          class="form-control" 
+          id="file-upload" 
+          name="file" 
+          type="file" 
+          accept="image/*" 
+          onchange="preview_image(event)" 
+          required
+        />
+      </div>
+    </div>
+
+    <!-- Image Preview -->
+    <img 
+      id="output-image" 
+      class="rounded mx-auto d-block" 
+      src="{{ url_for('send_file', filename=file_name) if file_name else './static/images/upload.jpg' }}" 
+      onerror="this.src='./static/images/upload.jpg'" 
+      style="max-width: 500px; max-height: 450px; margin-top: 30px; margin-bottom: 10px" 
+      alt="Uploaded Image Preview"
+    />
+    <p id="file-name" style="font-style: italic;">
+      {{ file_name if file_name else 'No file selected' }}
+    </p>
+
+    <br />
+
+    <!-- Submit Button -->
+    <div class="row" style="text-align: center;">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-success" value="submit">Predict</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+  // Function to preview the uploaded image
+  function preview_image(event) {
+    const reader = new FileReader();
+    reader.onload = function () {
+      const output = document.getElementById('output-image');
+      const fileNameDisplay = document.getElementById('file-name');
+      output.src = reader.result;
+      fileNameDisplay.textContent = event.target.files[0].name;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+
+<hr>
+
+{% else %}
+<!-- Display Disease Prediction Result -->
+
+<div class="container pt-5">
+  <h3 class="text-center">Prediction Result</h3>
+  <p class="text-center pt-3">Here are the results of your crop disease prediction.</p>
+</div>
+
+<!-- Display uploaded image -->
+<div class="container">
+  <h3 class="text-center">Uploaded Image:</h3>
+  <img 
+    src="{{ url_for('send_file', filename=image_file_name) }}" 
+    alt="Uploaded Image" 
+    class="rounded mx-auto d-block" 
+    style="max-width: 500px; max-height: 450px; margin-top: 30px;"
+  />
+  <p class="text-center" style="font-style: italic;">{{ image_file_name }}</p>
+</div>
+
+<!-- Display Disease Prediction -->
+<div class="container pt-5">
+  <h3 class="text-center">Prediction:</h3>
+  <p><strong>Disease:</strong> {{ result.disease_name }}</p>
+  <p><strong>Severity:</strong> {{ result.severity }}</p>
+</div>
+
+<!-- Display the Generated Report -->
+<div class="container pt-5">
+  <h3 class="text-center">Generated Report:</h3>
+  <pre>{{ report }}</pre> <!-- Display the report content -->
+</div>
+
+<hr>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(rgba(125, 120, 120, 0.1), #627E5D), url(../images/footer-bg.jpg);   
+    min-height: 100vh;
+}
+
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.navbar {
+    background-color:black;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.navbar h1 {
+    color: white;
+    text-align: center;
+}
+
+.input-section {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.cityInput {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    width: 300px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+#searchBtn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background-color: #023e8a;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#searchBtn:hover {
+    background-color: #03045e;
+}
+
+.weather-info {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.current-weather {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.detail {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.forecast {
+    margin-top: 2rem;
+}
+
+.forecast h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.forecast-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.forecast-item {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.error-message {
+    text-align: center;
+    color: white;
+    background: rgba(255, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.hidden {
+    display: none;
+}

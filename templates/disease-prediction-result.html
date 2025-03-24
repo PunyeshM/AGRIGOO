@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  <div class="container pt-5">
+    <h3 style="margin: auto;width: 80%; text-align: center; margin-top: 20px; text-transform: uppercase">Results Of Prediction</h3>
+    <div style="width: 90%; margin: auto; text-align: center">
+      <img src="{{ url_for('send_file', filename=image_file_name)}}" style="max-width: 500px; max-height: 450px; margin-top: 30px; margin-bottom: 10px" alt="Predicted Image">
+      <p style="font-style: italic">{{ image_file_name }}</p>
+
+      <h3 style="margin-top: 40px"><b>Prediction: <span style="color: green">{{ result }}</span></b></h3>
+      <script>
+        // Store the value of {{ result }} in a JavaScript variable
+        const predictionResult = "{{ result }}";
+        console.log("Stored result:", predictionResult);
+      </script>
+      <br>
+      <br>
+      <div class="prediction text-center">
+
+        <br>
+        <div>
+          <a href="http://127.0.0.1:5500/login.html" class="smoothScroll btn btn-success wow fadeInDown" data-wow-delay="2000">Generate Report</a>
+        </div> 
+        <br>
+        <a href="/" class="smoothScroll btn btn-success wow fadeInDown" data-wow-delay="2000">Back Home</a>
+
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+
+{% endblock %}

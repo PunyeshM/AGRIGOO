@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="bg">
+  <div class="content">
+    <h1 class="text-center" style="color:blanchedalmond;">Crop Recommendation</h1>
+    <p class="text-center pt-3" style="color: black;">Using your soil composition data and weather conditions, we can predict the best type of crop to sow.</p>
+    
+    <div class="container">
+      <form action="/crop-recommendation" method="POST">
+        <div class="col-md-12">
+          <label for="N">Amount of Azote:</label>
+          <input class="form-control"  type="number"  min="0" name="N" required placeholder="Enter amount of azote">
+        </div>
+        
+        <div class="col-md-12">
+          <label for="P">Amount of Phosphorous:</label>
+          <input class="form-control" type="number" min="0" name="P" required placeholder="Enter amount of phosphorous">
+        </div>
+
+        <div class="col-md-12">
+          <label for="K">Amount of Potassium:</label>
+          <input class="form-control"  type="number" min="0" name="K" required placeholder="Enter amount of potassium">
+        </div>
+
+        <div class="col-md-12">
+          <label for="temperature">Soil Temperature:</label>
+          <input class="form-control" type="number" min="0" step="any" name="temperature" required placeholder="Enter soil temperature">
+        </div>
+
+        <div class="col-md-12">
+          <label for="humidity">Humidity:</label>
+          <input class="form-control" type="number" min="0" step="any" name="humidity" required placeholder="Enter soil humidity level">
+        </div>
+
+        <div class="col-md-12">
+          <label for="phosphore">Soil pH:</label>
+          <input class="form-control" type="number" min="0" step="any" name="phosphore" required placeholder="Enter soil pH">
+        </div>
+
+        <div class="col-md-12">
+          <label for="rainfall">Amount boron</label>
+          <input class="form-control" type="number" min="0" step="any" name="rainfall" placeholder="Enter amount of rain received">
+        </div>
+
+        <div class="text-center" style="padding-top: 5%;">
+          <button type="submit" class="btn btn-success">Predict</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

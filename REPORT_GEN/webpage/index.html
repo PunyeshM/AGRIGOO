@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Disease Report Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🌾 Crop Disease Report Generator</h1>
+        <p class="description">Generate a comprehensive report for crop diseases with details on severity, solutions, and yield effects.</p>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label for="disease-name">Disease Name:</label>
+                <select id="severity">
+                    <option value="mild">Mild</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="severe">Severe</option>
+                </select>
+                <input type="text" id="disease-name" placeholder="e.g., TLB (Turcicum Leaf Blight)">
+            </div>
+
+            <div class="input-group">
+                <label for="severity">Severity Level:</label>
+                <select id="severity">
+                    <option value="mild">Mild</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="severe">Severe</option>
+                </select>
+            </div>
+
+            <button id="generate-btn">Generate Report</button>
+        </div>
+
+        <div id="report-section" class="hidden">
+            <h2>Generated Report</h2>
+            <div id="report-content"></div>
+            <button id="download-pdf">Download PDF Report</button>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+    <script src="database.js"></script>
+<script src="reportGenerator.js"></script>
+<script src="fileExport.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

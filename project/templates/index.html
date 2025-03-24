@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+        function predict(action) {
+            const disease = document.getElementById("disease").value;
+            if (!disease) {
+                alert("Please select a disease!");
+                return;
+            }
+
+            fetch("/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ disease })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const result = data.data[action];
+                    document.getElementById("result").innerText = 
+                        `${action === 'pesticide' ? "Pesticide" : "Fertilizer"}: ${result}`;
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Disease Prediction</h1>
+        <div class="form-group">
+            <label for="disease">Select Disease:</label>
+            <select id="disease">
+                <option value="">--Select--</option>
+                {% for disease in diseases %}
+                    <option value="{{ disease }}">{{ disease }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="buttons">
+            <button onclick="predict('pesticide')">Predict Pesticide</button>
+            <button onclick="predict('fertilizer')">Predict Fertilizer</button>
+        </div>
+        <div id="result" class="result"></div>
+    </div>
+</body>
+</html>
